@@ -1,62 +1,62 @@
 # meikaku
 
-Язык README: **Русский** | [English](README.en.md)
+README language: **English** | [Русский](README.ru.md)
 
-meikaku — инструмент для проверки данных, которые браузер предоставляет сайтам: геолокации, языков, региональных форматов, времени и раскладки клавиатуры. Приложение написано на обычных HTML, CSS и JavaScript. Фреймворки, установка пакетов и сборка не нужны.
+A browser environment inspector built with plain HTML, CSS and JavaScript. No frameworks, packages or build step are required.
 
-[Открыть сайт](https://tsukuyomi-vibe.github.io/meikaku/)
+[Open the website](https://tsukuyomi-vibe.github.io/meikaku/)
 
-## Запуск
+## Run
 
-Запустите локальный HTTP-сервер в папке проекта или разместите три файла приложения на хостинге с HTTPS:
+Serve this directory with a local static HTTP server and open its URL, or deploy the three application files to an HTTPS host:
 
-- `index.html` — структура страницы и исходные тексты на английском языке.
-- `styles.css` — адаптивное оформление, светлая и тёмная темы.
-- `script.js` — проверки браузерных API, русский и английский интерфейсы, отчёты в JSON.
+- `index.html` — page structure and English fallback text.
+- `styles.css` — responsive layout and light/dark themes.
+- `script.js` — browser API checks, English/Russian translations and JSON reports.
 
-Например, если установлен Python 3, выполните из папки проекта:
+For example, if Python 3 is installed, run this command from the project directory:
 
 ```sh
 python -m http.server 4173 --bind 127.0.0.1
 ```
 
-Откройте `http://127.0.0.1:4173/`. При открытии `index.html` напрямую часть данных отображается, но работа браузерных API зависит от правил HTTP/HTTPS и разрешений. Для проверки расширения используйте localhost или HTTPS.
+Open `http://127.0.0.1:4173/`. Opening `index.html` directly can display basic readings, but HTTP/HTTPS site rules and browser permissions may require a server. Use localhost or HTTPS when checking the extension.
 
-`info.md` — локальный справочный файл, исключённый из Git через `.gitignore`. Приложение не загружает его во время работы, и для публикации он не нужен. Не храните секреты в папке, доступной через публичный веб-сервер.
+`info.md` is a local reference, excluded by `.gitignore`. The application does not load it at runtime, so it is not required for deployment. Do not put secrets in a publicly served directory.
 
 ## GitHub Pages
 
-Сайт опубликован по адресу [tsukuyomi-vibe.github.io/meikaku](https://tsukuyomi-vibe.github.io/meikaku/).
+The public site is at [tsukuyomi-vibe.github.io/meikaku](https://tsukuyomi-vibe.github.io/meikaku/).
 
-Исходный код проекта находится в ветке `main`. GitHub Pages публикует корень ветки `gh-pages`, в которой лежат только `index.html`, `styles.css`, `script.js` и пустой файл `.nojekyll`. Локальные справочные файлы и выгруженные отчёты в публикацию сайта не входят.
+The project source is kept on `main`. GitHub Pages publishes the root of `gh-pages`, containing only `index.html`, `styles.css`, `script.js` and an empty `.nojekyll` file. Local reference files and exported reports are not included in the published site.
 
-## Язык интерфейса
+## Interface language
 
-При первом посещении интерфейс открывается на английском, даже если в браузере выбран русский язык. Выберите **Русский** в шапке страницы для переключения на русский или **English** для возврата к английскому. Страница обновляет интерфейс без перезагрузки.
+English is the default on the first visit, including when the browser's preferred language is Russian. Select **Русский** in the header to switch to Russian, or **English** to switch back. The interface updates without reloading the page.
 
-Выбор сохраняется локально под ключом `meikaku-language` со значением `en` или `ru` и восстанавливается при следующих посещениях того же сайта. Если локальное хранилище недоступно, переключение работает в текущей вкладке, а следующий визит начинается с английского. Удаление сохранённого значения возвращает английский язык по умолчанию. Настройка темы хранится отдельно, под ключом `meikaku-theme`.
+The choice is stored locally under `meikaku-language`, with the value `en` or `ru`, and restored on later visits to the same origin. If storage is unavailable, language switching still works in the current tab; the next visit starts in English. Removing the preference restores the English default. Theme preferences use a separate `meikaku-theme` key.
 
-Переключатель меняет тексты интерфейса, подписи для вспомогательных технологий, статусы и сообщения об ошибках, сформированные приложением. Он не меняет `navigator.language`, `navigator.languages`, локаль `Intl` по умолчанию, часовой пояс, карту клавиатуры и другие показания браузера. Примеры форматирования дат и чисел, нативные ошибки браузера и фактические символы клавиш сохраняют исходные значения, поэтому русские строки могут встречаться в показаниях при английском интерфейсе.
+The language selector changes interface text, accessibility labels, status messages and application-generated errors. It does not change `navigator.language`, `navigator.languages`, the default `Intl` locale, time zone, keyboard map or other browser readings. Diagnostic date/number examples, native browser error messages and actual key characters retain the values returned by the browser, so Russian text can legitimately appear in a reading while the interface is English.
 
-Словари переводов находятся в `messages.en` и `messages.ru` в файле `script.js`. Статические элементы используют атрибуты `data-i18n`. Динамические сообщения задаются ключами перевода и параметрами, чтобы их текущее состояние обновлялось при смене языка. При редактировании сохраняйте одинаковые ключи и подстановки `{parameter}` в обоих словарях.
+Translation dictionaries are in `messages.en` and `messages.ru` in `script.js`. Static elements use `data-i18n` attributes. Dynamic UI messages use translation keys and parameters, allowing their current state to update when the interface language changes. Keep the same keys and `{parameter}` placeholders in both dictionaries when editing translations.
 
-## Доступные проверки
+## Available checks
 
-- Геолокация: широта, долгота, точность, высота, точность высоты, скорость и направление движения. Соответствующими кнопками можно запросить координаты, начать и остановить наблюдение.
-- Языковые предпочтения браузера и независимая от них локаль форматирования дат и чисел.
-- API `Intl` для форматирования, сравнения строк, форм множественного числа, списков, названий, сегментации текста и длительности — если они поддерживаются браузером.
-- Локальные поля `Date`, значения UTC, создание и изменение дат, доступные методы `Temporal.Now`.
-- Keyboard Layout Map API, перебор карты раскладки и отдельное поле для проверки нажатий клавиш.
-- Доступность браузерных API, безопасный контекст и состояние разрешения на геолокацию.
+- Geolocation: latitude, longitude, accuracy, altitude, altitude accuracy, speed and heading. Request a position or start/stop watching with the corresponding buttons.
+- Browser language preferences and the independent date/number formatting locale.
+- `Intl` formatting, comparison, plural, list, display-name, segmentation and duration APIs when available.
+- Local `Date` fields, UTC values, date construction, setters and available `Temporal.Now` methods.
+- Keyboard Layout Map API, map iteration and a dedicated input test field.
+- Browser API availability, secure context and geolocation permission state.
 
-Отсутствующие API и отказы в разрешениях отображаются явно. Приложение не добавляет полифилы и не придумывает заменяющие показания. Совпадение значений само по себе не доказывает, что расширение активно.
+Missing APIs and denied permissions are reported explicitly. The application does not add polyfills or invent replacement readings. Matching values alone do not prove that the extension is active.
 
-Фактический HTTP-заголовок `Accept-Language` может проверить сервер, получивший запрос. Это статическое приложение помечает его как непроверенный и не обращается к сторонним сервисам для отражения заголовков.
+The actual `Accept-Language` request header must be checked by the server receiving the request. This static application marks it as unverified and does not call an external echo service.
 
-## Отчёты и конфиденциальность
+## Reports and privacy
 
-**Скачать отчёт** создаёт локальный JSON-файл. **Копировать JSON** помещает отчёт той же структуры в буфер обмена. Названия полей, идентификаторы API и диагностические сообщения приложения записываются на английском; поле `interfaceLanguage` содержит выбранный язык интерфейса. Реальные значения браузера и нативные ошибки сохраняются без перевода.
+**Download report** creates a local JSON file. **Copy JSON** writes the same report structure to the clipboard. Report field names, API identifiers and application-generated diagnostic messages use English; `interfaceLanguage` records the selected interface language. Actual browser values and native errors are preserved.
 
-В отчёт входят последний снимок данных и результаты геолокации и клавиатуры с отдельными отметками времени. Он может содержать точные координаты, если вы запросили доступ к геолокации, и последнее событие клавиатуры из тестового поля. Просматривайте отчёты перед отправкой другим людям.
+The report includes the latest snapshot and separately timestamped location and keyboard results. It can contain precise coordinates if you requested location access, plus the last key event from the input test field. Review reports before sharing them.
 
-В приложении нет аналитики, внешних шрифтов, сторонних скриптов и автоматической отправки данных. Показания остаются в текущей вкладке до скачивания или копирования отчёта. Выгруженные отчёты, секреты, локальные настройки и временные файлы исключены через `.gitignore`.
+There are no analytics, external fonts, third-party scripts or automatic uploads. Readings remain in the current tab until the user exports or copies them. Exported reports, secrets, local settings and temporary files are excluded by `.gitignore`.
