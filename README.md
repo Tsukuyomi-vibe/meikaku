@@ -53,6 +53,8 @@ Missing APIs and denied permissions are reported explicitly. The application doe
 
 The actual `Accept-Language` request header must be checked by the server receiving the request. This static application marks it as unverified and does not call an external echo service.
 
+The country field shows **Country not determined**. The application does not look up your country using an IP address or reverse geocoding.
+
 ## Reports and privacy
 
 **Download report** creates a local JSON file. **Copy JSON** writes the same report structure to the clipboard. Report field names, API identifiers and application-generated diagnostic messages use English; `interfaceLanguage` records the selected interface language. Actual browser values and native errors are preserved.

@@ -108,7 +108,8 @@
       "locale.numberLabel": "Number",
       "locale.datetime": "Date & time",
       "locale.relative": "Relative time",
-      "locale.region": "Region name",
+      "locale.country": "Country",
+      "locale.countryUnknown": "Country not determined",
       "locale.calendar": "Calendar",
       "locale.numbering": "Numbering system",
       "locale.grouping": "Digit grouping",
@@ -283,7 +284,8 @@
       "locale.numberLabel": "Число",
       "locale.datetime": "Дата и время",
       "locale.relative": "Относительное время",
-      "locale.region": "Название региона",
+      "locale.country": "Страна",
+      "locale.countryUnknown": "Страна не определена",
       "locale.calendar": "Календарь",
       "locale.numbering": "Система цифр",
       "locale.grouping": "Группировка разрядов",
@@ -622,7 +624,6 @@
     record("intl", "new Intl.RelativeTimeFormat().resolvedOptions()", () => { requireMethod(Intl, "RelativeTimeFormat"); return new Intl.RelativeTimeFormat().resolvedOptions(); });
     record("intl", 'new Intl.ListFormat().format(["A", "B", "C"])', () => { requireMethod(Intl, "ListFormat"); return new Intl.ListFormat().format(["A", "B", "C"]); });
     record("intl", "new Intl.ListFormat().resolvedOptions()", () => { requireMethod(Intl, "ListFormat"); return new Intl.ListFormat().resolvedOptions(); });
-    const region = record("intl", 'new Intl.DisplayNames(undefined, { type: "region" }).of("DE")', () => { requireMethod(Intl, "DisplayNames"); return new Intl.DisplayNames(undefined, { type: "region" }).of("DE"); });
     record("intl", 'new Intl.DisplayNames(undefined, { type: "region" }).resolvedOptions()', () => { requireMethod(Intl, "DisplayNames"); return new Intl.DisplayNames(undefined, { type: "region" }).resolvedOptions(); });
     record("intl", 'new Intl.Segmenter().segment("Hello, мир!")', () => {
       requireMethod(Intl, "Segmenter");
@@ -648,7 +649,6 @@
     setResult("format-bigint", bigInt);
     setResult("format-datetime", localDate);
     setResult("format-relative", relative);
-    setResult("format-region", region);
     setText("option-calendar", dateResolved.calendar);
     setText("option-numbering", numberResolved.numberingSystem);
     setResult("option-cycle", cycle);
