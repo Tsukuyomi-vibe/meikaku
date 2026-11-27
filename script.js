@@ -49,12 +49,7 @@
       "common.apiUnavailable": "API unavailable",
       "common.requesting": "Requesting…",
       "common.none": "None",
-      "common.unknown": "Unknown",
       "common.error": "Unavailable: {error}",
-      "unit.meters": "m",
-      "unit.metersValue": "{value} m",
-      "unit.speedValue": "{value} m/s",
-      "unit.degreesValue": "{value} °",
       "unit.minutesValue": "{value} min",
       "geo.title": "Geolocation",
       "geo.mapCaption": "BROWSER COORDINATES",
@@ -62,11 +57,6 @@
       "geo.emptyDescription": "Ask your browser for coordinates",
       "geo.latitude": "Latitude",
       "geo.longitude": "Longitude",
-      "geo.accuracy": "Accuracy",
-      "geo.altitude": "Altitude",
-      "geo.altitudeAccuracy": "Altitude accuracy",
-      "geo.speed": "Speed",
-      "geo.heading": "Heading",
       "geo.request": "Request location",
       "geo.pending": "Getting location…",
       "geo.watch": "Watch",
@@ -78,8 +68,8 @@
       "geo.readyMessage": "Select “Request location” to read your position.",
       "geo.received": "Received",
       "geo.watching": "Watching",
-      "geo.receivedMessage": "Location received · position timestamp {time}. null means unknown.",
-      "geo.watchingMessage": "Watching location · position timestamp {time}. null means unknown.",
+      "geo.receivedMessage": "Location received · position timestamp {time}.",
+      "geo.watchingMessage": "Watching location · position timestamp {time}.",
       "geo.error": "Request failed",
       "geo.errorDenied": "Geolocation was denied by your browser or this page's policy.",
       "geo.errorDeniedPrevious": "Geolocation was denied by your browser or this page's policy. The previous result is still displayed.",
@@ -172,8 +162,8 @@
       "group.construction.description": "Reference date: January 15, 2024, 12:00 local time. Each setter is checked on a separate copy.",
       "group.temporal.title": "Modern time APIs",
       "group.temporal.description": "Only methods already present in your browser are read. No polyfills are used.",
-      "group.geolocation.title": "Coordinates & serialization",
-      "group.geolocation.description": "The latest getCurrentPosition or watchPosition result. null means unknown; zero is preserved.",
+      "group.geolocation.title": "Coordinates & timestamps",
+      "group.geolocation.description": "Latitude, longitude and timestamp from the latest getCurrentPosition or watchPosition result.",
       "group.keyboard.title": "Layout map & actual input",
       "group.keyboard.description": "The map does not determine typed text. KeyboardEvent is read only in the input test field.",
       "group.http.title": "Request language",
@@ -234,12 +224,7 @@
       "common.apiUnavailable": "API недоступен",
       "common.requesting": "Запрашиваем…",
       "common.none": "Нет",
-      "common.unknown": "Неизвестно",
       "common.error": "Недоступно: {error}",
-      "unit.meters": "м",
-      "unit.metersValue": "{value} м",
-      "unit.speedValue": "{value} м/с",
-      "unit.degreesValue": "{value} °",
       "unit.minutesValue": "{value} мин",
       "geo.title": "Геолокация",
       "geo.mapCaption": "КООРДИНАТЫ БРАУЗЕРА",
@@ -247,11 +232,6 @@
       "geo.emptyDescription": "Запросите координаты у браузера",
       "geo.latitude": "Широта",
       "geo.longitude": "Долгота",
-      "geo.accuracy": "Точность",
-      "geo.altitude": "Высота",
-      "geo.altitudeAccuracy": "Точность высоты",
-      "geo.speed": "Скорость",
-      "geo.heading": "Направление",
       "geo.request": "Запросить координаты",
       "geo.pending": "Получаем координаты…",
       "geo.watch": "Наблюдать",
@@ -263,8 +243,8 @@
       "geo.readyMessage": "Нажмите «Запросить координаты», чтобы прочитать положение.",
       "geo.received": "Получена",
       "geo.watching": "Наблюдение",
-      "geo.receivedMessage": "Координаты получены · отметка позиции {time}. null означает неизвестное значение.",
-      "geo.watchingMessage": "Наблюдение активно · отметка позиции {time}. null означает неизвестное значение.",
+      "geo.receivedMessage": "Координаты получены · отметка позиции {time}.",
+      "geo.watchingMessage": "Наблюдение активно · отметка позиции {time}.",
       "geo.error": "Ошибка запроса",
       "geo.errorDenied": "Доступ к геолокации запрещён браузером или политикой страницы.",
       "geo.errorDeniedPrevious": "Доступ к геолокации запрещён браузером или политикой страницы. На экране сохранён предыдущий результат.",
@@ -357,8 +337,8 @@
       "group.construction.description": "Контрольная дата: 15 января 2024 года, 12:00 локального времени. Каждый setter проверяется на отдельной копии.",
       "group.temporal.title": "Современные API времени",
       "group.temporal.description": "Читаются только методы, которые уже существуют в браузере. Полифиллы не используются.",
-      "group.geolocation.title": "Координаты и сериализация",
-      "group.geolocation.description": "Результат последнего getCurrentPosition или watchPosition. null — неизвестное значение; ноль сохраняется.",
+      "group.geolocation.title": "Координаты и отметки времени",
+      "group.geolocation.description": "Широта, долгота и отметка времени из последнего результата getCurrentPosition или watchPosition.",
       "group.keyboard.title": "Карта и реальный ввод",
       "group.keyboard.description": "Данные карты не определяют вводимый текст. KeyboardEvent читается только в поле проверки ввода.",
       "group.http.title": "Сетевой язык",
@@ -774,14 +754,12 @@
       return;
     }
     const position = state.position;
-    for (const field of ["latitude", "longitude", "accuracy", "altitude", "altitudeAccuracy", "speed", "heading"]) {
+    for (const field of ["latitude", "longitude"]) {
       record("geolocation", `position.coords.${field}`, () => position.coords[field]);
     }
     record("geolocation", "position.timestamp", () => position.timestamp);
     record("geolocation", "position.timestamp (ISO)", () => new Date(position.timestamp).toISOString());
     record("geolocation", "Received by page (ISO)", () => state.geoReceivedAt);
-    record("geolocation", "position.toJSON()", () => requireMethod(position, "toJSON").toJSON());
-    record("geolocation", "position.coords.toJSON()", () => requireMethod(position.coords, "toJSON").toJSON());
   }
 
   function collectKeyboard() {
@@ -949,22 +927,20 @@
   }
 
   function renderPosition(position) {
-    state.position = position;
+    const { latitude, longitude } = position.coords;
+    const timestamp = position.timestamp;
+    const coords = { latitude, longitude };
+    state.position = { coords, timestamp };
     state.geoReceivedAt = new Date().toISOString();
     state.geoError = null;
-    const coords = position.coords;
-    for (const field of ["latitude", "longitude", "accuracy"]) {
+    for (const field of ["latitude", "longitude"]) {
       const target = $(`geo-${field}`);
       target.replaceChildren();
       target.append(document.createTextNode(String(coords[field])));
       const unit = document.createElement("span");
       unit.className = "value-unit";
-      if (field === "accuracy") localize(unit, "unit.meters");
-      else unit.textContent = "°";
+      unit.textContent = "°";
       target.append(unit);
-    }
-    for (const [field, unitKey] of [["altitude", "unit.metersValue"], ["altitudeAccuracy", "unit.metersValue"], ["speed", "unit.speedValue"], ["heading", "unit.degreesValue"]]) {
-      setLocalizedText(`geo-${field}`, coords[field] === null ? "common.unknown" : unitKey, { value: coords[field] });
     }
     const valid = Number.isFinite(coords.latitude) && Number.isFinite(coords.longitude) && Math.abs(coords.latitude) <= 90 && Math.abs(coords.longitude) <= 180;
     $("map-empty").hidden = valid;
@@ -978,7 +954,7 @@
     }
     const watching = state.watchId !== null;
     badge("geo-badge", watching ? "geo.watching" : "geo.received", "green");
-    setLocalizedText("geo-message", watching ? "geo.watchingMessage" : "geo.receivedMessage", { time: shortLocalTime(new Date(position.timestamp)) });
+    setLocalizedText("geo-message", watching ? "geo.watchingMessage" : "geo.receivedMessage", { time: shortLocalTime(new Date(timestamp)) });
     collectGeo();
     renderGroups();
   }
@@ -1020,7 +996,7 @@
         setGeoPending(false);
         handleGeoError(error);
         readGeoPermission();
-      }, { enableHighAccuracy: true, maximumAge: 0, timeout: 15000 });
+      }, { maximumAge: 0, timeout: 15000 });
     } catch (error) {
       setGeoPending(false);
       handleGeoError(error);
@@ -1053,7 +1029,7 @@
         stopWatch(false);
         handleGeoError(error);
         readGeoPermission();
-      }, { enableHighAccuracy: true, maximumAge: 0, timeout: 15000 });
+      }, { maximumAge: 0, timeout: 15000 });
       $("watch-button").setAttribute("aria-pressed", "true");
       localize($("watch-button").querySelector("span"), "geo.stop");
       badge("geo-badge", "geo.watching", "green");

@@ -42,7 +42,7 @@ Translation dictionaries are in `messages.en` and `messages.ru` in `script.js`. 
 
 ## Available checks
 
-- Geolocation: latitude, longitude, accuracy, altitude, altitude accuracy, speed and heading. Request a position or start/stop watching with the corresponding buttons.
+- Geolocation: latitude, longitude and position timestamp. Request a position or start/stop watching with the corresponding buttons.
 - Browser language preferences and the independent date/number formatting locale.
 - `Intl` formatting, comparison, plural, list, display-name, segmentation and duration APIs when available.
 - Local `Date` fields, UTC values, date construction, setters and available `Temporal.Now` methods.
