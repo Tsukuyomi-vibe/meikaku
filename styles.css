@@ -169,14 +169,10 @@ h2 { font-size: 1rem; font-weight: 620; letter-spacing: -.3px; }
 .map-marker-point { fill: var(--green); stroke: var(--surface); stroke-width: 2; }
 .map-position { position: absolute; bottom: 11px; left: 11px; max-width: calc(100% - 22px); display: flex; align-items: center; gap: 6px; background: var(--surface); padding: 5px 9px; border: 1px solid var(--line); border-radius: 6px; color: var(--green); font-size: .75rem; font-family: Consolas, monospace; }
 .map-position .icon { width: 13px; height: 13px; }
-.geo-values { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 20px 23px 0; gap: 12px; }
+.geo-values { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 20px 23px 22px; gap: 12px; }
 .geo-values dt { font-size: .75rem; color: var(--muted); margin-bottom: 5px; }
 .geo-values dd { font-family: Consolas, monospace; font-size: 1.1rem; font-weight: 500; letter-spacing: -.5px; overflow-wrap: anywhere; }
 .value-unit { margin-left: 4px; color: var(--muted); font-size: .75rem; font-weight: 400; }
-.geo-extras { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 18px 23px 17px; padding-top: 15px; border-top: 1px solid var(--line); gap: 7px; }
-.geo-extras > div { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-.geo-extras span { font-size: .75rem; color: var(--muted); }
-.geo-extras strong { font-size: .75rem; font-weight: 500; overflow-wrap: anywhere; }
 .geo-actions { display: flex; gap: 9px; margin: 0 23px; flex-wrap: wrap; }
 .panel-footnote { font-size: .75rem; color: var(--muted); line-height: 1.6; margin: 13px 23px 18px; }
 .geo-panel .panel-footnote { min-height: 22px; }
@@ -296,9 +292,6 @@ h2 { font-size: 1rem; font-weight: 620; letter-spacing: -.3px; }
   .geo-map { margin-left: 18px; margin-right: 18px; }
   .geo-actions { margin-left: 18px; margin-right: 18px; gap: 3px; }
   .geo-actions .button { font-size: .75rem; padding-left: 10px; padding-right: 10px; }
-  .geo-extras { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-  .geo-extras > div { flex-direction: row; align-items: baseline; justify-content: space-between; gap: 5px; }
-  .geo-extras span { font-size: .75rem; }
   .clock-area { padding-top: 22px; padding-bottom: 30px; }
   .info-strip { margin-top: 24px; }
   .keyboard-meta .source-label { display: none; }
@@ -363,8 +356,6 @@ h2 { font-size: 1rem; font-weight: 620; letter-spacing: -.3px; }
   .geo-map { height: 205px; margin: 0 21px; }
   .geo-values { margin-left: 21px; margin-right: 21px; }
   .geo-values dd { font-size: 1.16rem; }
-  .geo-extras { margin-left: 21px; margin-right: 21px; }
-  .geo-extras span { font-size: .75rem; }
   .geo-actions { margin-left: 21px; margin-right: 21px; gap: 6px; }
   .geo-actions .button { font-size: .75rem; }
   .clock-area { padding-top: 7px; padding-bottom: 24px; }
